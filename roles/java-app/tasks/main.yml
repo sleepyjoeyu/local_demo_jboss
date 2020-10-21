@@ -1,0 +1,39 @@
+---
+- name: Decide to deploy Jboss AP or not
+  include_role:
+    name: jboss-as-standalone 
+  when: "deploy_jboss == 'yes'"
+
+- name: Copy application WAR file to host
+  copy:
+    src: "{{ war_file }}"
+    dest: /tmp
+
+- name: Backup oringinal war file
+  file:
+    path: /root/backup
+    state: directory 
+  stat:
+    path: "{{ jboss_app_deployment_path }}/{{ app_name }}.war"
+  register: stat_result
+  copy:
+    src: "{{ jboss_app_deployment_path }}/{{ app_name }}.war"
+    dest: "/root/backup/{{ app_name }}-{{ ansible_date_time.epoch }}.war"
+  when: stat_result.stat.exists
+
+- name: :Deployment of new application
+  jboss:
+    deployment: "{{ app_name }}.war"
+    deploy_path: "{{ jboss_app_deployment_path }}"
+    src: "/tmp/{{ war_file }}"
+    state: present
+  when: upgrade == 'False'
+
+- name: Upgrade Application
+  jboss:
+    deployment: "{{ app_name }}.war"
+    deploy_path: "{{ jboss_app_deployment_path }}"
+    src: "/tmp/{{ war_file }}"
+    state: present
+  when: upgrade == 'True'
+

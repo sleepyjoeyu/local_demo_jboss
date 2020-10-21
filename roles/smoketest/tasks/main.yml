@@ -1,0 +1,23 @@
+---
+
+- name: Check webserver for correct response
+  uri:
+    url: "http://192.168.122.116:8080/{{ app_name }}"
+    return_content: yes
+  until: '"Hello World!" in result.content'
+  retries: 10
+  delay: 1
+  register: result
+  delegate_to: localhost
+  ignore_errors: true
+- name: Show result
+  debug:
+    var: result
+- name: Check OK
+  debug:
+    msg: "Application deployment OK!"
+  when: result.status == 200
+- name: Check Not OK
+  debug:
+    msg: "Application deployment not working!"
+  failed_when: result.status != 200

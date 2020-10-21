@@ -1,11 +1,8 @@
 ---
-- name: Decide to deploy Jboss AP or not
-  include_role:
-    name: jboss-as-standalone 
-  when: "deploy_jboss == 'yes'"
-
+- debug:
+    msg: "Host is {{ ansible_hostname }}"
 - name: Copy application WAR file to host
-  copy:
+  copy: 
     src: "{{ war_file }}"
     dest: /tmp
 
@@ -13,15 +10,18 @@
   file:
     path: /root/backup
     state: directory 
-  stat:
+- stat:
     path: "{{ jboss_app_deployment_path }}/{{ app_name }}.war"
   register: stat_result
-  copy:
+- debug:
+    var: stat_result
+- copy:
     src: "{{ jboss_app_deployment_path }}/{{ app_name }}.war"
     dest: "/root/backup/{{ app_name }}-{{ ansible_date_time.epoch }}.war"
+    remote_src: true
   when: stat_result.stat.exists
 
-- name: :Deployment of new application
+- name: Deployment of new application
   jboss:
     deployment: "{{ app_name }}.war"
     deploy_path: "{{ jboss_app_deployment_path }}"

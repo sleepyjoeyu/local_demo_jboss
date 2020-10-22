@@ -1,0 +1,12 @@
+---
+- name: test
+  hosts: localhost
+
+  tasks:
+  
+  - name: gather
+    shell: "ansible-inventory --list | jq ._meta.hostvars[].ansible_host"
+    register: rs
+
+  - debug: 
+      var: rs.stdout_lines

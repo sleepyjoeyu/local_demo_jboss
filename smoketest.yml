@@ -2,7 +2,7 @@
 # This playbook deploys simple applications to JBoss server
 - name: Test application 
   hosts: localhost 
-  gather_facts: False
+#  gather_facts: False
 
   roles:
     - smoketest 

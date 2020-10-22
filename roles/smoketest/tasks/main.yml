@@ -1,23 +1,18 @@
 ---
-
+- name: Action1
+  shell: "ansible-inventory --list | jq ._meta.hostvars[].ansible_host"
+  register: rs
+- name: Action2
+  debug:
+    msg: "http://{{ item }}:8080/{{ app_name }}"
+  loop: "{{ rs.stdout_lines }}"
 - name: Check webserver for correct response
   uri:
-    url: "http://192.168.122.116:8080/{{ app_name }}"
+    url: "http://{{ item }}:8080/{{ app_name }}"
     return_content: yes
   until: '"Hello World!" in result.content'
-  retries: 10
+  retries: 2
   delay: 1
   register: result
   delegate_to: localhost
-  ignore_errors: true
-- name: Show result
-  debug:
-    var: result
-- name: Check OK
-  debug:
-    msg: "Application deployment OK!"
-  when: result.status == 200
-- name: Check Not OK
-  debug:
-    msg: "Application deployment not working!"
-  failed_when: result.status != 200
+  loop: "{{ rs.stdout_lines }}"

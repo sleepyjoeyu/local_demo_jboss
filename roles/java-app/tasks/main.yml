@@ -29,11 +29,15 @@
     state: present
   when: upgrade == 'False'
 
-- name: Upgrade Application
+- name: Upgrade Application-1
+  file:
+    path: "{{ jboss_app_deployment_path }}/{{ app_name }}.war"
+    state: absent
+  when: upgrade == 'True'
+- name: Upgrade Application-2
   jboss:
     deployment: "{{ app_name }}.war"
     deploy_path: "{{ jboss_app_deployment_path }}"
     src: "/tmp/{{ war_file }}"
     state: present
   when: upgrade == 'True'
-

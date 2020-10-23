@@ -1,7 +1,8 @@
 ---
 # This playbook deploys simple applications to JBoss server
 - name: Test application 
-  hosts: localhost 
+  hosts: apservers 
+#  hosts: localhost 
 #  gather_facts: False
 
   roles:

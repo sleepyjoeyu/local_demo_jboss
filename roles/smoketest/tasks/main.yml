@@ -1,18 +1,14 @@
 ---
-- name: Action1
-  shell: "ansible-inventory --list | jq ._meta.hostvars[].ansible_host"
-  register: rs
-- name: Action2
-  debug:
-    msg: "http://{{ item }}:8080/{{ app_name }}"
-  loop: "{{ rs.stdout_lines }}"
 - name: Check webserver for correct response
   uri:
-    url: "http://{{ item }}:8080/{{ app_name }}"
+    url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{ app_name }}/status.html"
     return_content: yes
-  until: '"Hello World!" in result.content'
-  retries: 2
+  retries: 10
   delay: 1
   register: result
   delegate_to: localhost
-  loop: "{{ rs.stdout_lines }}"
+- name: show result
+  debug:
+    msg: "{{ inventory_hostname }} service status is OK"
+  when: result.status == 200
+

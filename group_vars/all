@@ -8,7 +8,7 @@ jboss_eap_patch_artifact_name: 'jboss-eap-6.4.12-patch.zip'
 jboss_management_http_port: 9990
 jboss_management_https_port: 9443
 jboss_patch_files_directory: '/opt/jboss-patches'
-deploy_jboss: no
+deploy_jboss: yes 
 # user add parapmeter
 war_file: joetest.war
 app_name: oct26

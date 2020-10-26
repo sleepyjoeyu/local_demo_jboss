@@ -9,6 +9,8 @@ jboss_management_http_port: 9990
 jboss_management_https_port: 9443
 jboss_patch_files_directory: '/opt/jboss-patches'
 deploy_jboss: no
+# user add parapmeter
 war_file: joetest.war
-app_name: oct
+app_name: oct26
+upgrade: True
 

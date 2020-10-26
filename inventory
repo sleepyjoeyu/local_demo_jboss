@@ -1,9 +1,2 @@
 [apservers]
 appserver1 ansible_host=192.168.122.11
-
-[all:vars]
-# user add parapmeter
-war_file: joetest.war
-app_name: oct26
-upgrade: True
-version: 3

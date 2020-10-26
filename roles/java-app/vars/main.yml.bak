@@ -1,5 +1,6 @@
-deploy_jboss: no 
+---
+deploy_jboss: no
 war_file: joetest.war
 app_name: oct26
-upgrade: True
+upgrade: False
 version: 6

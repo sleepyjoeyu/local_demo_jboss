@@ -1,7 +1,14 @@
 ---
+- name: Include vars of role java-ap
+  include_vars:
+    file: ../../java-app/vars/main.yml 
+    name: man_vars
+- name: Show APP_NAME
+  debug:
+    msg: "APP_NAME = {{ man_vars.app_name }}"
 - name: Check webserver for correct response
   uri:
-    url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{ app_name }}/status.html"
+    url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{  man_vars.app_name }}/status.html"
     return_content: yes
   retries: 10
   delay: 1

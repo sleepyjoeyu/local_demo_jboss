@@ -1,7 +1,7 @@
 ---
 - name: Include vars of role java-ap
   include_vars:
-    file: ../../java-app/vars/main.yml 
+    file: ../../vars/main.yml
     name: man_vars
 - name: Show APP_NAME
   debug:

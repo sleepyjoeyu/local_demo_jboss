@@ -3,11 +3,15 @@
   include_vars:
     file: ../../vars/main.yml
     name: man_vars
+- name: set_fact for payload
+  set_stats:
+    data:
+      stuff: {{ tower_webhook_payload }}
 - name: Show APP_NAME
   debug:
     msg: 
     - "APP_NAME = {{ man_vars.app_name }}"
-    - "EMAIL = {{ tower_webhook_payload | json_query(\"commits[].author[0].email\") }} "
+    - "PAYLOAD = {{ stuff }}" 
 - name: Check webserver for correct response
   uri:
     url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{  man_vars.app_name }}/status.html"

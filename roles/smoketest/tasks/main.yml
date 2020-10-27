@@ -1,5 +1,5 @@
 ---
-- nam_: Include vars of role java-ap
+- name: Include vars of role java-ap
   include_vars:
     file: ../../vars/main.yml
     name: man_vars

@@ -25,10 +25,11 @@
   mail:
     host: smtp.gmail.com
     port: 465
-    username: sleepyjoeyu
-    password: dj96k88r
+    secure: always 
+    username: sleepyjoeyu@gmail.com
+    password: tracqypzhddsvdks 
     to: "{{ man_vars.emailto }}"
     subject: Ansible Report for App Deployment
-    body: "{{ app_name }} has been successfully deployed with {{ war_file }}"
-  delegate_to: localhost
+    body: "{{ man_vars.app_name }} has been successfully deployed with {{ man_vars.war_file }}"
+#  delegate_to: localhost
   when: man_vars.emailto is defined

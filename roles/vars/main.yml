@@ -1,0 +1,6 @@
+---
+deploy_jboss: no
+war_file: joetest.war
+app_name: oct
+upgrade: False 
+version: 15

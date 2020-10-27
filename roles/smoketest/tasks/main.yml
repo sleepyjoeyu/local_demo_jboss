@@ -23,10 +23,10 @@
 
 - name: Sending notification email for App deployment
   mail:
-  host: localhost
-  port: 25
-  to: SLEEPYJOEYU <sleepyjoeyu@gmail.com>
-  subject: Ansible Report for App Deployment
-  body: "{{ app_name }} has been successfully deployed with {{ war_file } by {{ tower_webhook_payload.commits.author.email }}}"
+    host: localhost
+    port: 25
+    to: SLEEPYJOEYU <sleepyjoeyu@gmail.com>
+    subject: Ansible Report for App Deployment
+    body: "{{ app_name }} has been successfully deployed with {{ war_file } by {{ tower_webhook_payload.commits.author.email }}}"
   delegate_to: localhost
 

@@ -22,7 +22,7 @@
   when: result.status == 200
 
 - name: Sending notification email for App deployment
-mail:
+  mail:
   host: localhost
   port: 25
   to: SLEEPYJOEYU <sleepyjoeyu@gmail.com>

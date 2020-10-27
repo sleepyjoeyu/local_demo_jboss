@@ -23,8 +23,10 @@
 
 - name: Sending notification email for App deployment
   mail:
-    host: localhost
-    port: 25
+    host: smtp.gmail.com
+    port: 465
+    username: sleepyjoeyu
+    password: dj96k88r
     to: "{{ man_vars.emailto }}"
     subject: Ansible Report for App Deployment
     body: "{{ app_name }} has been successfully deployed with {{ war_file }}"

@@ -3,10 +3,6 @@
   include_vars:
     file: ../../vars/main.yml
     name: man_vars
-- name: set_fact for payload
-  set_stats:
-    data:
-      stuff: {{ tower_webhook_payload }}
 - name: Show APP_NAME
   debug:
     msg: 

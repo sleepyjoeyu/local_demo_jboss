@@ -5,7 +5,9 @@
     name: man_vars
 - name: Show APP_NAME
   debug:
-    msg: "APP_NAME = {{ man_vars.app_name }}"
+    msg: 
+    - "APP_NAME = {{ man_vars.app_name }}"
+    - "EMAIL = {{ tower_webhook_payload.commits.author.email }}"
 - name: Check webserver for correct response
   uri:
     url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{  man_vars.app_name }}/status.html"
@@ -18,4 +20,13 @@
   debug:
     msg: "{{ inventory_hostname }} service status is OK"
   when: result.status == 200
+
+- name: Sending notification email for App deployment
+mail:
+  host: localhost
+  port: 25
+  to: SLEEPYJOEYU <sleepyjoeyu@gmail.com>
+  subject: Ansible Report for App Deployment
+  body: "{{ app_name }} has been successfully deployed with {{ war_file } by {{ tower_webhook_payload.commits.author.email }}}"
+  delegate_to: localhost
 

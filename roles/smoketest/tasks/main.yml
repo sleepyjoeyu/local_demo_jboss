@@ -11,7 +11,7 @@
   debug:
     msg: 
     - "APP_NAME = {{ man_vars.app_name }}"
-    - "PAYLOAD = {{ stuff }}" 
+    - "EMAILTO = {{ man_vars.emailto }}" 
 - name: Check webserver for correct response
   uri:
     url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{  man_vars.app_name }}/status.html"
@@ -29,8 +29,8 @@
   mail:
     host: localhost
     port: 25
-    to: SLEEPYJOEYU <sleepyjoeyu@gmail.com>
+    to: "{{ man_vars.emailto }}"
     subject: Ansible Report for App Deployment
-    body: "{{ app_name }} has been successfully deployed with {{ war_file } by {{ tower_webhook_payload | json_query(\"commits[].author[0].email\") }} "
+    body: "{{ app_name }} has been successfully deployed with {{ war_file }}"
   delegate_to: localhost
-
+  when: man_vars.emailto is defined

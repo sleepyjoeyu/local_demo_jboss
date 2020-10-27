@@ -1,5 +1,5 @@
 ---
-- name: Include vars of role java-ap
+- nam_: Include vars of role java-ap
   include_vars:
     file: ../../vars/main.yml
     name: man_vars
@@ -7,7 +7,7 @@
   debug:
     msg: 
     - "APP_NAME = {{ man_vars.app_name }}"
-    - "EMAIL = {{ tower_webhook_payload.commits.author.email }}"
+    - "EMAIL = {{ tower_webhook_payload | json_query(\"commits[].author[0].email\") }} "
 - name: Check webserver for correct response
   uri:
     url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{  man_vars.app_name }}/status.html"
@@ -27,6 +27,6 @@
     port: 25
     to: SLEEPYJOEYU <sleepyjoeyu@gmail.com>
     subject: Ansible Report for App Deployment
-    body: "{{ app_name }} has been successfully deployed with {{ war_file } by {{ tower_webhook_payload.commits.author.email }}}"
+    body: "{{ app_name }} has been successfully deployed with {{ war_file } by {{ tower_webhook_payload | json_query(\"commits[].author[0].email\") }} "
   delegate_to: localhost
 

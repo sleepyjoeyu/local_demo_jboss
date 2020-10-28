@@ -4,9 +4,9 @@
   hosts: apservers 
 #  hosts: localhost 
 #  gather_facts: False
-  vars:
-    include_vars: 
-      file: group_vars/gmail.txt
+  vars_files:
+    - roles/vars/main.yml
+    - roles/vars/gmail.txt
 
   roles:
     - smoketest 

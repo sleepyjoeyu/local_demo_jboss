@@ -1,0 +1,4 @@
+secret.*
+roles/smoketest/tasks/*.bak1
+roles/smoketest/tasks/*.bak2
+roles/smoketest/templates/mail_body.j2

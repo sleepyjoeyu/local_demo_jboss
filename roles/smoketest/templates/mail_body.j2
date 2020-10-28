@@ -1,0 +1,6 @@
+"{{ app_name }} has been successfully deployed with {{ war_file }}"
+
+{% for host in play_hosts %}
+The {{ host }} says {{ hostvars[host]['result']['stdout'] }}
+{% endfor %}
+

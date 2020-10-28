@@ -4,4 +4,7 @@ war_file: joetest.war
 app_name: oct27
 upgrade: False 
 version: 19
-emailto: sleepyjoeyu@gmail.com
+report_file: /tmp/report2020.txt
+emailto: 
+  - sleepyjoeyu@gmail.com
+  - joyu@redhat.com 

@@ -1,14 +1,9 @@
 ---
-- name: prepare
-  file:
-    path: "{{ report_file }}"
-    state: absent
-  delegate_to: localhost
 - name: Show APP_NAME
   debug:
     msg: 
     - "APP_NAME = {{ app_name }}"
-    - "EMAILTO = {{ emailto|default(unknown) }}" 
+    - "EMAILTO = {{ emailto }}" 
 - name: Check webserver for correct response
   uri:
     url: "http://{{ hostvars[inventory_hostname]['ansible_host'] }}:8080/{{  app_name }}/status.html"
@@ -17,13 +12,13 @@
   delay: 1
   register: result
   delegate_to: localhost
-- name: show result 1
+- name: show result
   debug:
     msg: "{{ inventory_hostname }} service status is OK"
   when: result.status == 200
-- name: collect report-1
-  local_action: shell /bin/echo "{{ inventory_hostname }} service status is OK" >> "{{ report_file }}" 
-  when: result.status == 200
+- name: collect report
+  set_fact:
+    report: "{{ report }} \n {{ inventory_hostname }} service status is OK"
 - name: Sending notification email for App deployment
   mail:
     host: smtp.gmail.com
@@ -33,11 +28,7 @@
     password: "{{ password }}" 
     to: "{{ emailto }}"
     subject: Ansible Report for App Deployment
-    body: 
+    body:
       - "{{ app_name }} has been successfully deployed with {{ war_file }}"
-    attach:
-      -  "{{ report_file }}"
-  loop: "{{ emailto }}"
-  run_once: true
+      - "{{ report.split('\n') }}"
   when: emailto is defined
-  delegate_to: localhost

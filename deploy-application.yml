@@ -3,6 +3,8 @@
 - name: Deploy Simple Application to JBoss Server
   hosts: apservers 
 #  gather_facts: False
+  vars_files:
+    - roles/vars/main.yml
 
   roles:
     - java-app

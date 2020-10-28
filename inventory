@@ -1,4 +1,3 @@
 [apservers]
 appserver1 ansible_host=192.168.122.116
 appserver2 ansible_host=192.168.122.180
-appserver3 ansible_host=192.168.122.118

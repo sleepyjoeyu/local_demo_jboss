@@ -17,13 +17,24 @@
   delay: 1
   register: result
   delegate_to: localhost
+  ignore_errors: yes 
+ 
 - name: show result 1
   debug:
-    msg: "{{ inventory_hostname }} service status is OK"
+    msg: 
+      - "{{ inventory_hostname }} service status is OK:"
+      - "{{ result.url }}"
+      - "{{ result.content }}"
   when: result.status == 200
+
 - name: collect report-1
-  local_action: shell /bin/echo "{{ inventory_hostname }} service status is OK" >> "{{ report_file }}" 
+  local_action: shell /bin/echo -e "{{ inventory_hostname }} service status is OK  \n{{ result.content }}" >> "{{ report_file }}" 
   when: result.status == 200
+
+- name: collect report-2
+  local_action: shell /bin/echo -e "{{ inventory_hostname }} service status is  not OK" >> "{{ report_file }}" 
+  when: result.status != 200 or result is undefined or result.failed == true
+
 - name: Sending notification email for App deployment
   mail:
     host: smtp.gmail.com
@@ -34,7 +45,7 @@
     to: "{{ emailto }}"
     subject: Ansible Report for App Deployment
     body: 
-      - "{{ app_name }} has been successfully deployed with {{ war_file }}"
+      - '"Application:{{ app_name }} has been successfully deployed with {{ war_file }}"'
     attach:
       -  "{{ report_file }}"
   loop: "{{ emailto }}"

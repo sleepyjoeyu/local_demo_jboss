@@ -1,9 +1,10 @@
 ---
+rs: ""
 deploy_jboss: no
 war_file: joetest.war
-app_name: oct28
-upgrade: True 
-version: 21
+app_name: Nov2 
+upgrade: False 
+version: 22
 report_file: /tmp/report2020.txt
 emailto: 
   - sleepyjoeyu@gmail.com

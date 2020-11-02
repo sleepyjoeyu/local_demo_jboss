@@ -30,7 +30,7 @@
     -  "UPGRADE VAULE = {{ upgrade }}"
     -  "WAR_FILE VAULE = {{ war_file }}"
     -  "APP_NAME VAULE = {{ app_name }}"
-    -  "APP_NAME VAULE = {{ version }}"
+    -  "VERSION VAULE = {{ version }}"
 
 - name: Deployment of new application
   jboss:

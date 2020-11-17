@@ -4,7 +4,7 @@ deploy_jboss: no
 war_file: joetest.war
 app_name: Nov2 
 upgrade: False 
-version: 22
+version: 23
 report_file: /tmp/report2020.txt
 emailto: 
   - sleepyjoeyu@gmail.com

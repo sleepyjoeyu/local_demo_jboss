@@ -3,10 +3,7 @@
   debug:
     msg: "Host is {{ ansible_hostname }}"
 - name: Copy application WAR file to host
-  synchronize:
-    src: "{{ war_path }}/{{ war_file }}"
-    dest: /tmp
-  delegate_to: localhost
+  local_action: shell /bin/scp  "{{ war_path }}/{{ war_file }}"  "{{ hostvars[inventory_hostname]['ansible_host'] }}:/tmp" 
 
 - name: Make sure backup is OK
   file:

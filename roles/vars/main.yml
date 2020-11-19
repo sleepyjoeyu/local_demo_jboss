@@ -2,7 +2,7 @@
 rs: ""
 deploy_jboss: no
 content_source: /root/github/local/jboss_demo/content
-war_path: /root/github/local/jboss_demo/wars
+war_path: /root/github/local/wars
 war_file: test19.war
 app_name: Nov19 
 upgrade: False 

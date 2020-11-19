@@ -1,11 +1,13 @@
 ---
 rs: ""
 deploy_jboss: no
-war_file: joetest.war
-app_name: Nov2 
+content_source: /root/github/local/jboss_demo/content
+war_path: /root/github/local/jboss_demo/wars
+war_file: test19.war
+app_name: Nov19 
 upgrade: False 
-version: 23
+version: 25
+status_msg: "Joe said:  Hello, welcome automation world! "
 report_file: /tmp/report2020.txt
 emailto: 
-  - sleepyjoeyu@gmail.com
   - joyu@redhat.com 

@@ -4,7 +4,7 @@
     msg: "Host is {{ ansible_hostname }}"
 - name: Copy application WAR file to host
   copy: 
-    src: "{{ war_path }}/{{ war_file }}"
+    src: "{{ war_file }}"
     dest: /tmp
 
 - name: Make sure backup is OK
@@ -21,7 +21,7 @@
 - name: Backup the same APP_NAME war file 
   copy:
     src: "{{ jboss_app_deployment_path }}/{{ app_name }}.war"
-    dest: "/root/backup/{{ app_name }}-{{ version }}-{{ ansible_date_time.epoch }}.war"
+    dest: "/root/backup/{{ app_name }}-{{ ansible_date_time.epoch }}.war"
     remote_src: true
   when: stat_result.stat.exists
 - name: Show all variable values

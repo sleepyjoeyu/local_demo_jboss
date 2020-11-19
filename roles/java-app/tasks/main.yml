@@ -6,6 +6,7 @@
   synchronize:
     src: "{{ war_path }}/{{ war_file }}"
     dest: /tmp
+  delegate_to: localhost
 
 - name: Make sure backup is OK
   file:

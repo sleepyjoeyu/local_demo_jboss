@@ -6,7 +6,7 @@ war_path: /root/github/local/jboss_demo/wars
 war_file: test19.war
 app_name: Nov19 
 upgrade: False 
-version: 25
+version: 26
 status_msg: "Joe said:  Hello, welcome automation world! "
 report_file: /tmp/report2020.txt
 emailto: 

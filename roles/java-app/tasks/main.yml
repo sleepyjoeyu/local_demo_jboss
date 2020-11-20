@@ -6,6 +6,7 @@
   copy:
     src: "{{ war_path }}/{{ war_file }}"
     dest: /tmp
+    remote_src: yes 
 
 - name: Make sure backup is OK
   file:

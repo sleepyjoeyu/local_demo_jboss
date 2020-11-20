@@ -2,11 +2,11 @@
 #content_source: /root/github/local/jboss_demo/content
 content_source: /data/content
 war_path: /data/wars
-war_file: test20.war
-app_name: nov20 
+war_file: test21.war
+app_name: nov21 
 upgrade: False 
-version: 27
-status_msg: "Joe said:  2020-11-20 Hello, welcome automation world! "
+version: 30 
+status_msg: " 2020-11-20 Hello, welcome automation world, again! "
 report_file: /tmp/report2020.txt
 emailto: 
   - joyu@redhat.com 

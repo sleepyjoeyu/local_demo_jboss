@@ -1,5 +1,6 @@
 ---
-content_source: /root/github/local/jboss_demo/content
+#content_source: /root/github/local/jboss_demo/content
+content_source: /data/content
 war_path: /data/wars
 war_file: test20.war
 app_name: nov20 

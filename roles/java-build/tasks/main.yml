@@ -1,0 +1,17 @@
+---
+- name: clean up  
+  file:
+    path: "{{ war_path }}/{{ war_file }}"
+    state: absent
+  delegate_to: localhost
+- name: update status
+  template:
+    src: status.html.j2
+    dest: "{{ content_source }}/status.html"
+  delegate_to: localhost
+- name: build
+  shell: cd "{{ content_source }}" && jar -cf  "{{ war_path }}/{{ war_file }}" .
+  delegate_to: localhost
+- name: show
+  debug:
+    msg: "WARFILE={{ war_path }}/{{ war_file }}"

@@ -1,0 +1,8 @@
+---
+# This playbook deploys simple applications to JBoss server
+- name: Build java war file  
+  hosts: all 
+  vars_files:
+    - roles/vars/main.yml
+  roles:
+    - java-build 

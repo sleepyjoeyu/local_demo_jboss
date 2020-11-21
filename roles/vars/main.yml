@@ -2,11 +2,11 @@
 #content_source: /root/github/local/jboss_demo/content
 content_source: /data/content
 war_path: /data/wars
-war_file: test1121.war
-app_name: joedemo
+war_file: joetest1234.war
+app_name: demo1234
 upgrade: False 
-version: 33
-status_msg: "Automation is great! "
+version: 34
+status_msg: "Automation make your life great! "
 report_file: /tmp/report2020.txt
 emailto: 
   - joyu@redhat.com 
